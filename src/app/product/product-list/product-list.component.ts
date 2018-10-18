@@ -33,5 +33,11 @@ export class ProductListComponent implements OnInit {
     this.available = e.date;
 
   }
+  onDelete(e) {
+    if (window.confirm('Are sure you want to delete this item ?')) {
+      this.productService.deleteProduct(e);
+    }
+
+  }
 
 }

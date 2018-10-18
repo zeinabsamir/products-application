@@ -30,14 +30,14 @@
 
               <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
               (click)="getInfo(products[i])" data-target="#infoModal">Info</button>
-              <button type="button" class="btn btn-danger btn-sm">Delete</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)='onDelete(i)'>Delete</button>
               <button type="button" class="btn btn-primary btn-sm">Edit</button>
             </td>
 
           </tr>
         </tbody>
       </table>
-      <h1 *ngIf="products.length <= 0" [style.color]='"red"'>No products yet</h1>
+      <p *ngIf="products.length <= 0" [style.color]='"red"'>No products yet</p>
     </div>
   </div>
 </div>
