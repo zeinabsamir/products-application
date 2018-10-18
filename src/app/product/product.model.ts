@@ -1,9 +1,9 @@
 export interface Product {
-  SKU: String;
+  sku: String;
   name: String;
   category: String;
   price: number;
   date?: Date;
-  imageUrl: string;
+  image: string;
 
 }

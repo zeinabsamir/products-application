@@ -1,5 +1,5 @@
 <div class="container">
-  <form (submit)="onCreateProduct(productForm)"  #productForm="ngForm">
+  <form (submit)="onSubmitProduct(productForm)"  #productForm="ngForm">
     <div class="form-group">
       <label for="productSKU">SKU</label>
       <input type="text" name="sku" ngModel class="form-control" id="productSKU"
@@ -56,6 +56,6 @@
           </div>
         </div>
      </div>
-    <button type="submit" class="btn btn-primary">Create Product</button>
+    <button type="submit" class="btn btn-primary">{{ editMode ? 'Update':'Create Product'}}</button>
   </form>
 </div>

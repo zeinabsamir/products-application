@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { Product } from './product.model';
 
@@ -7,14 +8,17 @@ import { Product } from './product.model';
 })
 export class ProductService {
 
+  updatedProduct = new Subject<Product[]>();
+
+  startEditing = new Subject<number>();
 
   private   products: Product[] = [
-    {SKU: 'GDN-320', name: 'Alice in the wonderland', category: 'book', price: 34, date: new Date(),
-    imageUrl: 'https://pngimg.com/uploads/book/book_PNG2116.png' },
-    {SKU: 'GQW-221', name: 'chair', category: 'furniture', price: 309, date: new Date(),
-     imageUrl: 'http://ii.worldmarket.com/fcgi-bin/iipsrv.fcgi?FIF=/images/worldmarket/source/25892_XXX_v1.tif&wid=2000&cvt=jpeg' },
-    {SKU: 'EDF-351', name: 'jacket', category: 'cloths', price: 45, date: new Date(),
-     imageUrl: 'http://www.buffalosystems.co.uk/wp-content/uploads/2012/06/zoom_apline_jacket_dark_russet-2365x3286.jpg' }
+    {sku: 'GDN-320', name: 'Alice in the wonderland', category: 'book', price: 34, date: new Date(),
+    image: 'https://pngimg.com/uploads/book/book_PNG2116.png' },
+    {sku: 'GQW-221', name: 'chair', category: 'furniture', price: 309, date: new Date(),
+     image: 'http://ii.worldmarket.com/fcgi-bin/iipsrv.fcgi?FIF=/images/worldmarket/source/25892_XXX_v1.tif&wid=2000&cvt=jpeg' },
+    {sku: 'EDF-351', name: 'jacket', category: 'cloths', price: 45, date: new Date(),
+     image: 'http://www.buffalosystems.co.uk/wp-content/uploads/2012/06/zoom_apline_jacket_dark_russet-2365x3286.jpg' }
   ];
 
   constructor() { }
@@ -23,19 +27,42 @@ export class ProductService {
     return this.products;
   }
 
+  getProductUpdteListener() {
+    return this.updatedProduct.asObservable();
+  }
+
   addProducts(sku: string, name: string, category: string,
               price: number, image: string) {
                 const product: Product = {
-                  SKU: sku,
+                  sku: sku,
                   name: name,
                   category: category,
                   price: price,
-                  imageUrl: image,
-                  date: new Date()
+                  image: image,
+                  date: new Date(),
                 };
                this.products.push(product);
+               this.updatedProduct.next(this.products);
               }
+
     deleteProduct(index: number) {
       this.products.splice(index, 1);
+      this.updatedProduct.next(this.products);
     }
+
+    getProductById(index: number) {
+     return this.products[index];
+    }
+
+    updateProduct(index: number, newProduct: Product ) {
+        this.products[index].sku = newProduct.sku;
+        this.products[index].name = newProduct.name;
+        this.products[index].category = newProduct.category;
+        this.products[index].price = newProduct.price;
+        this.products[index].image = newProduct.image;
+        this.updatedProduct.next(this.products);
+
+
+    }
+
 }

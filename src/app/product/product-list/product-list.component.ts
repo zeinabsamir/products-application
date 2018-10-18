@@ -10,34 +10,39 @@ import { ProductService } from '../product.service';
 export class ProductListComponent implements OnInit {
    imageWidth = 50;
    imageMargin = 2;
+   productId: number;
    name = '';
    image = '';
    sku = '';
    available = '';
    price = '';
 
-
   products: Product[] = [];
 
   constructor(public productService: ProductService ) { }
 
   ngOnInit() {
-
     this.products =  this.productService.getProducts();
+    this.productService.getProductUpdteListener()
+    .subscribe((products: Product[]) => {
+       this.products = products;
+    });
   }
   getInfo(e) {
     this.name = e.name;
-    this.sku = e.SKU;
+    this.sku = e.sku;
     this.price = e.price;
-    this.image = e.imageUrl;
+    this.image = e.image;
     this.available = e.date;
 
   }
-  onDelete(e) {
+  onDelete(index) {
     if (window.confirm('Are sure you want to delete this item ?')) {
-      this.productService.deleteProduct(e);
+      this.productService.deleteProduct(index);
     }
-
+  }
+  onEdit(index: number) {
+     this.productService.startEditing.next(index);
   }
 
 }
