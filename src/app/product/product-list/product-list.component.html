@@ -11,11 +11,13 @@
             <th scope="col">Price</th>
             <th scope="col">Available</th>
             <th scope="col">Image</th>
+            <th scope="col"></th>
+
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let product of products'>
-            <th scope="row">{{product.SKU}}</th>
+          <tr *ngFor='let product of products let i=index'>
+            <td>{{product.SKU}}</td>
             <td>{{product.name}}</td>
             <td>{{product.category}}</td>
             <td>{{product.price | currency}}</td>
@@ -24,10 +26,48 @@
                    [title]='product.name'
                    [style.width.px]='imageWidth'
                    [style.margin.style]='imageMargin'></td>
+             <td>
+
+              <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+              (click)="getInfo(products[i])" data-target="#infoModal">Info</button>
+              <button type="button" class="btn btn-danger btn-sm">Delete</button>
+              <button type="button" class="btn btn-primary btn-sm">Edit</button>
+            </td>
+
           </tr>
         </tbody>
       </table>
+      <h1 *ngIf="products.length <= 0" [style.color]='"red"'>No products yet</h1>
     </div>
   </div>
 </div>
 
+<!--Modal-->
+<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="infoModalLabel">{{name}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <img [src]='image'
+          [title]='name'
+          [style.width.%]='50'
+          [style.margin.px]='10' />
+          <h4>SKU:</h4>
+          <h3>{{sku}}</h3>
+          <h4>Available:</h4>
+          <h3>{{ available | date:'medium'}}</h3>
+          <h4>Price:</h4>
+          <h3>{{price | currency}}</h3>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

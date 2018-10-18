@@ -10,12 +10,28 @@ import { ProductService } from '../product.service';
 export class ProductListComponent implements OnInit {
    imageWidth = 50;
    imageMargin = 2;
+   name = '';
+   image = '';
+   sku = '';
+   available = '';
+   price = '';
+
+
   products: Product[] = [];
+
   constructor(public productService: ProductService ) { }
 
   ngOnInit() {
 
     this.products =  this.productService.getProducts();
+  }
+  getInfo(e) {
+    this.name = e.name;
+    this.sku = e.SKU;
+    this.price = e.price;
+    this.image = e.imageUrl;
+    this.available = e.date;
+
   }
 
 }
