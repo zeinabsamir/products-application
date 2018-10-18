@@ -1,24 +1,61 @@
-<form>
+<div class="container">
+  <form (submit)="onCreateProduct(productForm)"  #productForm="ngForm">
     <div class="form-group">
       <label for="productSKU">SKU</label>
-      <input type="text" class="form-control" id="productSKU"  placeholder="Enter product SKU">
+      <input type="text" name="sku" ngModel class="form-control" id="productSKU"
+            placeholder="Enter product SKU" #sku="ngModel"
+            required >
+      <div *ngIf="sku.invalid && (productForm.submitted|| sku.touched)"  class="alert alert-danger">
+        <div *ngIf="sku?.errors.required">
+          SKU is required.
+        </div>
+      </div>
 
     </div>
     <div class="form-group">
       <label for="productName">Name</label>
-      <input type="text" class="form-control" id="productName" placeholder="Enter product name">
-    </div>
+      <input type="text" name="name" ngModel class="form-control" id="productName"
+       placeholder="Enter product name" #name="ngModel"
+       required >
+      <div *ngIf="name.invalid && (productForm.submitted|| name.touched)"  class="alert alert-danger">
+        <div *ngIf="name?.errors.required">
+          Name is required.
+        </div>
+      </div>
+     </div>
     <div class="form-group">
         <label for="productCategory">Category</label>
-        <input type="text" class="form-control" id="productCategory" placeholder="Enter product Category">
+        <input type="text" name="category" ngModel class="form-control" id="productCategory"
+         placeholder="Enter product Category" #category="ngModel"
+         required >
+         <div *ngIf="category.invalid && (productForm.submitted|| category.touched)"  class="alert alert-danger">
+          <div *ngIf="category?.errors.required">
+            Category is required.
+          </div>
+        </div>
     </div>
     <div class="form-group">
         <label for="productPrice">Price</label>
-        <input type="number" class="form-control" id="productPrice" placeholder="Enter product Price">
+        <input type="number" name="price" ngModel class="form-control" id="productPrice"
+         placeholder="Enter product Price" #price="ngModel"
+         required >
+         <div *ngIf="price.invalid && (productForm.submitted|| price.touched)"  class="alert alert-danger">
+          <div *ngIf="price?.errors.required">
+            Price is required.
+          </div>
+        </div>
      </div>
      <div class="form-group">
         <label for="productImageUrl">Image Url</label>
-        <input type="text" class="form-control" id="productImageUrl" placeholder="Enter product image Url">
+        <input type="text" name="image" ngModel class="form-control" id="productImageUrl"
+        placeholder="Enter product image Url" #image="ngModel"
+        required >
+        <div *ngIf="image.invalid && (productForm.submitted|| image.touched)"  class="alert alert-danger">
+          <div *ngIf="image?.errors.required">
+            Image url is required.
+          </div>
+        </div>
      </div>
     <button type="submit" class="btn btn-primary">Create Product</button>
   </form>
+</div>
