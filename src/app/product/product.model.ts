@@ -3,7 +3,7 @@ export interface Product {
   name: String;
   category: String;
   price: number;
-  date: Date;
+  date?: Date;
   imageUrl: string;
 
 }

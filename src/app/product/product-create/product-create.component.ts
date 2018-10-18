@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
+import { ProductService } from '../product.service';
+
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
@@ -8,7 +10,7 @@ import { NgForm } from '@angular/forms';
 })
 export class ProductCreateComponent implements OnInit {
 
-  constructor() { }
+  constructor(public productService: ProductService) { }
 
   ngOnInit() {
   }
@@ -16,15 +18,12 @@ export class ProductCreateComponent implements OnInit {
      if (form.invalid) {
          return;
      }
-    const product = {
-      SKU: form.value.sku,
-      name: form.value.name,
-      category: form.value.category,
-      price: form.value.price,
-      imageUrl: form.value.image
 
-    };
-    console.log(product);
+    this.productService.addProducts(form.value.sku, form.value.name,
+       form.value.category, form.value.price,
+       form.value.image);
+
+    form.resetForm();
   }
 
 }
