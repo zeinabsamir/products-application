@@ -8,21 +8,21 @@ import { ProductService } from '../product.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-   imageWidth = 50;
-   imageMargin = 2;
-   productId: number;
-   name = '';
-   image = '';
-   sku = '';
-   available = '';
-   price = '';
+  imageWidth = 50;
+  imageMargin = 2;
+  productId: number;
+  name = '';
+  image = '';
+  sku = '';
+  available = '';
+  price = '';
 
   products: Product[] = [];
 
-  constructor(public productService: ProductService ) { }
+  constructor(public productService: ProductService) {}
 
   ngOnInit() {
-    this.products =  this.productService.getProducts();
+    this.products = this.productService.getProducts();
   }
 
   getInfo(e) {
@@ -40,7 +40,6 @@ export class ProductListComponent implements OnInit {
   }
 
   onEdit(index: number) {
-     this.productService.startEditing.next(index);
+    this.productService.startEditing.next(index);
   }
-
 }
