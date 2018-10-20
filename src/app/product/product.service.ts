@@ -12,7 +12,7 @@ export class ProductService {
 
   startEditing = new Subject<number>();
 
-  private   products: Product[] = [
+  private products: Product[] = [
     {sku: 'GDN-320', name: 'Alice in the wonderland', category: 'book', price: 34, date: new Date(),
     image: 'https://pngimg.com/uploads/book/book_PNG2116.png' },
     {sku: 'GQW-221', name: 'chair', category: 'furniture', price: 309, date: new Date(),
@@ -27,42 +27,34 @@ export class ProductService {
     return this.products;
   }
 
-  getProductUpdteListener() {
-    return this.updatedProduct.asObservable();
-  }
-
   addProducts(sku: string, name: string, category: string,
               price: number, image: string) {
-                const product: Product = {
+     const product: Product = {
                   sku: sku,
                   name: name,
                   category: category,
                   price: price,
                   image: image,
                   date: new Date(),
-                };
-               this.products.push(product);
-               this.updatedProduct.next(this.products);
-              }
+      };
+    this.products.push(product);
+  }
 
-    deleteProduct(index: number) {
+  deleteProduct(index: number) {
       this.products.splice(index, 1);
-      this.updatedProduct.next(this.products);
-    }
 
-    getProductById(index: number) {
+  }
+
+ getProductById(index: number) {
      return this.products[index];
-    }
+ }
 
-    updateProduct(index: number, newProduct: Product ) {
+ updateProduct(index: number, newProduct: Product ) {
         this.products[index].sku = newProduct.sku;
         this.products[index].name = newProduct.name;
         this.products[index].category = newProduct.category;
         this.products[index].price = newProduct.price;
         this.products[index].image = newProduct.image;
-        this.updatedProduct.next(this.products);
-
-
-    }
+  }
 
 }

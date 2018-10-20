@@ -12,7 +12,6 @@
             <th scope="col">Available</th>
             <th scope="col">Image</th>
             <th scope="col"></th>
-
           </tr>
         </thead>
         <tbody>
@@ -26,14 +25,12 @@
                    [title]='product.name'
                    [style.width.px]='imageWidth'
                    [style.margin.style]='imageMargin'></td>
-             <td>
-
+            <td>
               <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
               (click)="getInfo(products[i])" data-target="#infoModal">Info</button>
               <button type="button" class="btn btn-danger btn-sm" (click)='onDelete(i)'>Delete</button>
               <button type="button" class="btn btn-primary btn-sm" (click)='onEdit(i)'>Edit</button>
             </td>
-
           </tr>
         </tbody>
       </table>

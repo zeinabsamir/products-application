@@ -23,24 +23,22 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.products =  this.productService.getProducts();
-    this.productService.getProductUpdteListener()
-    .subscribe((products: Product[]) => {
-       this.products = products;
-    });
   }
+
   getInfo(e) {
     this.name = e.name;
     this.sku = e.sku;
     this.price = e.price;
     this.image = e.image;
     this.available = e.date;
-
   }
+
   onDelete(index) {
     if (window.confirm('Are sure you want to delete this item ?')) {
       this.productService.deleteProduct(index);
     }
   }
+
   onEdit(index: number) {
      this.productService.startEditing.next(index);
   }
